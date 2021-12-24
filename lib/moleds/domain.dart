@@ -17,6 +17,8 @@ extension DomainExtension on Domain {
         return Strings.flutter;
       case Domain.macos:
         return Strings.macos;
+      case Domain.archived:
+        return Strings.archived;
       default:
         return Strings.unknown;
     }
