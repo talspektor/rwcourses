@@ -4,6 +4,7 @@ import 'package:rwcourses/moleds/course.dart';
 import 'package:rwcourses/repository/course_repository.dart';
 import 'package:rwcourses/ui/course_detail/course_details_page.dart';
 import 'package:rwcourses/ui/courses/courses_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CoursesPage extends StatefulWidget {
   const CoursesPage({Key? key}) : super(key: key);
@@ -14,11 +15,19 @@ class CoursesPage extends StatefulWidget {
 
 class _CoursesPageState extends State<CoursesPage> {
   final _controller = CoursesController(CourseRepository());
+  int _filterValue = Constants.allFilter;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadValue();
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Course>>(
-      future: _controller.fetchCourses(Constants.allFilter),
+      future: _controller.fetchCourses(_filterValue),
       builder: (context, snapshot) {
         final courses = snapshot.data;
         if (courses == null) {
@@ -64,5 +73,12 @@ class _CoursesPageState extends State<CoursesPage> {
         },
       ),
     );
+  }
+
+  _loadValue() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _filterValue = prefs.getInt(Constants.filterKey) ?? 0;
+    });
   }
 }

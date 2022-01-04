@@ -9,4 +9,5 @@ class Strings {
   static String macos = 'macOS';
   static String archived = 'Archived';
   static String unknown = 'Unknown';
+  static String all = 'all';
 }

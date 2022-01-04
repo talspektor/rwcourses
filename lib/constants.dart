@@ -9,7 +9,7 @@ class Constants {
   static const String flutterDomain = '9';
 
   // Values stored in preferences
-  static const int insFilter = 1;
+  static const int iosFilter = 1;
   static const int androidFilter = 2;
   static const int flutterFilter = 9;
   static const int sssFilter = 8;
