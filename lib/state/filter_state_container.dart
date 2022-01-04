@@ -8,16 +8,16 @@ class FilterStateContainer extends StatefulWidget {
   const FilterStateContainer({Key? key, required this.child}) : super(key: key);
 
   @override
-  FilterStateContainerState createState() => FilterStateContainerState();
+  FilterState createState() => FilterState();
 
-  static FilterStateContainerState of(BuildContext context) {
+  static FilterState of(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<_FilterInheritedWidget>()!
         .state;
   }
 }
 
-class FilterStateContainerState extends State<FilterStateContainer> {
+class FilterState extends State<FilterStateContainer> {
   int filterValue = Constants.allFilter;
   late SharedPreferences _prefs;
 
@@ -51,7 +51,7 @@ class FilterStateContainerState extends State<FilterStateContainer> {
 }
 
 class _FilterInheritedWidget extends InheritedWidget {
-  final FilterStateContainerState state;
+  final FilterState state;
 
   const _FilterInheritedWidget({
     Key? key,

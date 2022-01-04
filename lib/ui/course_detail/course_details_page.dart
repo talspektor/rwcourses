@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rwcourses/moleds/course.dart';
-import 'package:rwcourses/ui/course_detail/image_contaiber.dart';
+import 'package:rwcourses/moled/course.dart';
+import 'package:rwcourses/ui/course_detail/image_container.dart';
 
 class CourseDetailsPage extends StatelessWidget {
   const CourseDetailsPage({required this.course, Key? key}) : super(key: key);

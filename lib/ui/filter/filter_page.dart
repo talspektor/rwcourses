@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rwcourses/constants.dart';
+import 'package:rwcourses/state/filter_state_container.dart';
 import 'package:rwcourses/strings.dart';
 import 'package:rwcourses/ui/filter/filter_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key}) : super(key: key);
@@ -12,13 +12,13 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  int _filterValue = Constants.allFilter;
+  late FilterState state;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _loadValue();
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    state = FilterStateContainer.of(context);
   }
 
   @override
@@ -32,43 +32,43 @@ class _FilterPageState extends State<FilterPage> {
         children: [
           FilterWidget(
             value: Constants.iosFilter,
-            groupValue: _filterValue,
+            groupValue: state.filterValue,
             onChanged: _handleRadioValueChange,
             text: Strings.ios,
           ),
           FilterWidget(
             value: Constants.androidFilter,
-            groupValue: _filterValue,
+            groupValue: state.filterValue,
             onChanged: _handleRadioValueChange,
             text: Strings.android,
           ),
           FilterWidget(
             value: Constants.flutterFilter,
-            groupValue: _filterValue,
+            groupValue: state.filterValue,
             onChanged: _handleRadioValueChange,
             text: Strings.flutter,
           ),
           FilterWidget(
             value: Constants.sssFilter,
-            groupValue: _filterValue,
+            groupValue: state.filterValue,
             onChanged: _handleRadioValueChange,
             text: Strings.sss,
           ),
           FilterWidget(
             value: Constants.unityFilter,
-            groupValue: _filterValue,
+            groupValue: state.filterValue,
             onChanged: _handleRadioValueChange,
             text: Strings.unity,
           ),
           FilterWidget(
             value: Constants.macosFilter,
-            groupValue: _filterValue,
+            groupValue: state.filterValue,
             onChanged: _handleRadioValueChange,
             text: Strings.macos,
           ),
           FilterWidget(
             value: Constants.allFilter,
-            groupValue: _filterValue,
+            groupValue: state.filterValue,
             onChanged: _handleRadioValueChange,
             text: Strings.all,
           )
@@ -77,18 +77,7 @@ class _FilterPageState extends State<FilterPage> {
     );
   }
 
-  _loadValue() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _filterValue = prefs.getInt(Constants.filterKey) ?? 0;
-    });
-  }
-
   _handleRadioValueChange(int? value) async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _filterValue = value ?? 0;
-      prefs.setInt(Constants.filterKey, _filterValue);
-    });
+    state.updateFilterValue(value ?? 0);
   }
 }

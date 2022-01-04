@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:rwcourses/constants.dart';
-import 'package:rwcourses/moleds/course.dart';
+import 'package:rwcourses/moled/course.dart';
 import 'package:rwcourses/repository/repository.dart';
 
 class CourseRepository implements Repository {

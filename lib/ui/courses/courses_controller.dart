@@ -1,4 +1,4 @@
-import 'package:rwcourses/moleds/course.dart';
+import 'package:rwcourses/moled/course.dart';
 import 'package:rwcourses/repository/repository.dart';
 
 class CoursesController {
